@@ -1,0 +1,20 @@
+# Node
+node_modules/
+dist/
+.next/
+out/
+build/
+.pnpm-store/
+
+# Django
+__pycache__/
+*.pyc
+*.pyo
+db.sqlite3
+media/
+venv/
+.env
+
+# General
+.DS_Store
+*.log
