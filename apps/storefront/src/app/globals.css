@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  /* ألوان وتصميمات RM Medwear المأخوذة من Figma */
+  --color-brand-600: #084c54; /* لون الهوية الأساسي (الداكن) */
+  --color-brand-700: #06393f; /* لون الهوية عند مرور الماوس */
+  --color-neutral-50: #f8fafc; /* لون الخلفيات الفاتحة */
+  --color-neutral-900: #111827; /* لون النصوص الأساسية */
+  --radius-card: 0.75rem;
+}
+@layer base {
+  body {
+    @apply bg-neutral-50 text-neutral-900 antialiased;
+  }
+}
