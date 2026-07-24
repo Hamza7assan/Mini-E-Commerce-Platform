@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/Button";
 
 
 export default async function CategoriesPage() {
-  
   let categories = [];
   try {
     const data = await getCategories();
@@ -15,29 +14,32 @@ export default async function CategoriesPage() {
   }
 
   return (
-    <div className="w-full bg-neutral-50 min-h-screen py-16">
-      <div className="max-w-360 mx-auto px-4 md:px-8 lg:px-16 flex flex-col items-center">
-        <h1 className="text-4xl font-bold text-neutral-900 mb-16 relative">
-          All Categories
-          <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-12 h-1 bg-brand-600"></div>
+    <div className="w-full bg-neutral-50 min-h-screen pb-24">
+      {/* Page Header */}
+      <div className="w-full bg-brand-600 py-16 flex items-center justify-center shadow-inner">
+        <h1 className="text-4xl md:text-5xl font-bold text-white uppercase tracking-widest">
+          Categories
         </h1>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-5xl">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {categories.length > 0 ? (
             categories.map((cat: Category) => (
-              <Link href={`/categories/${cat.slug}`} key={cat.id} className="group flex flex-col items-center gap-6">
-                <div className="w-full aspect-3/4 bg-neutral-200 overflow-hidden relative">
-                  {cat.image ? (
-                    <img src={cat.image} alt={cat.name} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-neutral-400 bg-neutral-200">No Image</div>
-                  )}
+              <Link href={`/categories/${cat.slug}`} key={cat.id} className="group relative overflow-hidden rounded-sm shadow-sm hover:shadow-xl transition-all duration-300 h-96 bg-white block">
+                {cat.image ? (
+                  <img src={cat.image} alt={cat.name} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" />
+                ) : (
+                  <div className="w-full h-full bg-neutral-100 flex items-center justify-center text-neutral-400">No Image</div>
+                )}
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-300"></div>
+                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[85%] bg-white py-4 text-center text-brand-600 font-bold uppercase tracking-widest shadow-lg rounded-sm group-hover:-translate-y-2 transition-transform duration-300">
+                  {cat.name}
                 </div>
-                <Button className="w-48 rounded-none tracking-widest uppercase">{cat.name}</Button>
               </Link>
             ))
           ) : (
-            <p className="col-span-full text-center text-neutral-500">No Categories Found</p>
+            <p className="col-span-full text-center text-neutral-500 py-20 text-lg">No Categories Found</p>
           )}
         </div>
       </div>

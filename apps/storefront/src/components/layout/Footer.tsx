@@ -13,8 +13,7 @@ export const Footer = () => {
           {}
           <div className="flex flex-col items-start">
              <Link href="/" className="flex flex-col text-white mb-4">
-                <span className="text-3xl font-bold tracking-wider leading-none">RM</span>
-                <span className="text-[12px] tracking-[0.2em] font-medium mt-1 uppercase text-white/80">Medwear</span>
+                <span className="text-3xl font-serif font-bold tracking-widest leading-none">RM</span>
               </Link>
           </div>
 

@@ -24,20 +24,27 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
   const categories = Array.isArray(categoriesData) ? categoriesData : categoriesData?.results || [];
 
   return (
-    <div className="w-full bg-neutral-50/30 py-12 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold text-neutral-900 mb-2">All Products</h1>
-          <p className="text-neutral-500">Explore Premium</p>
-        </div>
-        <div className="flex flex-col md:flex-row gap-10">
-          <FilterSidebar categories={categories} selectedCategory={category} q={q} sort={sort} />
+    <div className="w-full bg-neutral-50 min-h-screen pb-24">
+      {/* Page Header */}
+      <div className="w-full bg-brand-600 py-16 flex items-center justify-center shadow-inner">
+        <h1 className="text-4xl md:text-5xl font-bold text-white uppercase tracking-widest">
+          Products
+        </h1>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+        <div className="flex flex-col md:flex-row gap-12">
+          <div className="w-full md:w-64 shrink-0">
+            <FilterSidebar categories={categories} selectedCategory={category} q={q} sort={sort} />
+          </div>
           <main className="grow">
             <Suspense fallback={<div className="h-16 w-full animate-pulse bg-neutral-100 mb-6 rounded-sm"></div>}>
               <ProductSearchSort />
             </Suspense>
-            <div className="mb-4">
-              <span className="text-sm text-neutral-500">Showing {products.length} results {q ? `for "${q}"` : ""}</span>
+            <div className="mb-6 border-b border-neutral-200 pb-4">
+              <span className="text-sm font-medium text-neutral-500 uppercase tracking-wider">
+                Showing {products.length} results {q ? `for "${q}"` : ""}
+              </span>
             </div>
             <ProductGrid initialProducts={products} />
           </main>

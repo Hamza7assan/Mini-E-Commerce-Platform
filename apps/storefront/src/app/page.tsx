@@ -3,10 +3,7 @@ import Link from "next/link";
 import { getCategories, getProducts } from "@/lib/api";
 import { Category, Product } from "@/types";
 
-
 export default async function Home() {
-  
-
   let categories: Category[] = [];
   let products: Product[] = [];
 
@@ -21,82 +18,74 @@ export default async function Home() {
     // handled via UI
   }
 
-  // Get the latest 4 products
   const latestProducts = products.slice(0, 4);
 
   return (
     <div className="flex flex-col w-full bg-white">
-      
       {/* 1. Hero Section */}
-      <section 
-        className="relative w-full h-[85vh] min-h-150 flex items-center bg-neutral-900 overflow-hidden"
-        style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1584982751601-97d8cb0f6662?q=80&w=2070')",
-          backgroundSize: "cover",
-          backgroundPosition: "center 20%",
-        }}
-      >
-        <div className="absolute inset-0 bg-brand-600/70 mix-blend-multiply"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent ltr:from-black/80 ltr:to-transparent rtl:from-transparent rtl:to-black/80"></div>
-        
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-start gap-6 text-white">
-          <span className="text-brand-300 font-medium tracking-widest uppercase text-sm mb-2 opacity-90 animate-fade-in">New Collection</span>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold max-w-4xl leading-[1.1] tracking-tight drop-shadow-lg">
-            Premium Medical Apparel for Modern Professionals
+      <section className="relative w-full h-[60vh] md:h-[75vh] flex items-center bg-brand-600 overflow-hidden">
+        <div className="absolute inset-0 w-full h-full opacity-40 mix-blend-overlay">
+          <img 
+            src="https://images.unsplash.com/photo-1584982751601-97d8cb0f6662?q=80&w=2070" 
+            alt="Hero Background" 
+            className="w-full h-full object-cover" 
+          />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white max-w-3xl leading-[1.15]">
+            Effortless Comfort,<br />Professional Performance
           </h1>
-          
-          <p className="text-lg md:text-xl max-w-2xl text-white/90 leading-relaxed font-light mt-2 drop-shadow-md">
-            Experience unmatched comfort and style with our new collection of scrubs and lab coats designed for your demanding workday.
+          <p className="mt-6 text-lg md:text-xl text-white/90 font-light max-w-xl">
+            Minimal effort, maximum comfort designed for the modern medical professional.
           </p>
-          
-          <div className="flex items-center gap-4 mt-8">
+          <div className="mt-10">
             <Link href="/products">
-              <Button size="lg" className="bg-white !text-brand-600 hover:bg-neutral-100 hover:scale-105 hover:shadow-2xl transition-all duration-300 font-bold px-12 py-7 text-lg rounded-sm shadow-xl group flex items-center gap-3">
+              <Button className="bg-white text-brand-600 hover:bg-neutral-100 rounded-sm font-semibold px-10 py-7 text-lg shadow-xl">
                 Shop Now
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform rtl:rotate-180 rtl:group-hover:-translate-x-1"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* 2. Banner */}
-      <section className="w-full py-12 bg-brand-600 text-white border-y border-brand-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center divide-y sm:divide-y-0 sm:divide-x sm:rtl:divide-x-reverse divide-white/20">
-          <div className="flex flex-col items-center py-4 sm:py-0">
-            <h4 className="text-xl font-bold mb-2 tracking-wide">Premium Fabrics</h4>
-            <p className="text-brand-100 text-sm font-light">Antimicrobial, moisture-wicking, and stretchable.</p>
-          </div>
-          <div className="flex flex-col items-center py-4 sm:py-0">
-            <h4 className="text-xl font-bold mb-2 tracking-wide">Tailored Fit</h4>
-            <p className="text-brand-100 text-sm font-light">Designed to move with you.</p>
-          </div>
-          <div className="flex flex-col items-center py-4 sm:py-0">
-            <h4 className="text-xl font-bold mb-2 tracking-wide">Fast Delivery</h4>
-            <p className="text-brand-100 text-sm font-light">Free shipping on orders over 100 JOD.</p>
-          </div>
-        </div>
+      {/* 2. About Us */}
+      <section className="w-full py-24 bg-white" id="about">
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-16 items-center">
+            <div className="md:w-1/2">
+               <h2 className="text-4xl font-bold text-brand-600 mb-6">About Us</h2>
+               <div className="w-12 h-1 bg-brand-600 mb-8"></div>
+               <p className="text-lg text-neutral-600 leading-relaxed font-light">
+                 At RM Medwear, we believe that medical professionals deserve apparel that works as hard as they do. Our premium scrubs combine innovative fabric technology with modern designs, ensuring you stay comfortable and confident throughout your shift. We merge quality with aesthetics to elevate your daily professional life.
+               </p>
+            </div>
+            <div className="md:w-1/2 flex justify-center">
+               <div className="w-72 h-72 bg-brand-50 rounded-full flex items-center justify-center overflow-hidden border-8 border-white shadow-2xl relative">
+                 <img src="/images/about-us.png" alt="About Us" className="w-full h-full object-cover" />
+                 {/* Fallback image if local doesn't exist */}
+                 <div className="absolute inset-0 -z-10">
+                   <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2070" className="w-full h-full object-cover" />
+                 </div>
+               </div>
+            </div>
+         </div>
       </section>
 
       {/* 3. Categories */}
       <section className="w-full py-24 bg-neutral-50" id="categories">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-           <h2 className="text-4xl font-bold text-neutral-900 mb-16 relative">
-             Featured Categories
-             <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-12 h-1 bg-brand-600"></div>
-           </h2>
-
-           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 w-full">
-              {categories.slice(0, 5).map((cat: Category) => (
-                <Link href={`/categories/${cat.slug}`} key={cat.id} className="group flex flex-col items-center gap-4 bg-white p-4 shadow-sm hover:shadow-xl transition-all duration-300 rounded-sm">
-                  <div className="w-full aspect-square bg-neutral-100 overflow-hidden relative rounded-sm">
-                    {cat.image ? (
-                      <img src={cat.image} alt={cat.name} className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-neutral-400 bg-neutral-100">No Image</div>
-                    )}
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <h2 className="text-3xl font-bold text-brand-600 mb-12 text-center tracking-wider">Categories</h2>
+           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {categories.slice(0, 4).map((cat: Category) => (
+                <Link href={`/categories/${cat.slug}`} key={cat.id} className="group relative overflow-hidden rounded-sm shadow-sm hover:shadow-xl transition-all duration-300 h-96 bg-white block">
+                  {cat.image ? (
+                    <img src={cat.image} alt={cat.name} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" />
+                  ) : (
+                    <div className="w-full h-full bg-neutral-100 flex items-center justify-center text-neutral-400">No Image</div>
+                  )}
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-300"></div>
+                  <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[85%] bg-white py-4 text-center text-brand-600 font-bold uppercase tracking-widest shadow-lg rounded-sm group-hover:-translate-y-2 transition-transform duration-300">
+                    {cat.name}
                   </div>
-                  <Button variant="outline" className="w-full rounded-sm tracking-widest uppercase font-semibold group-hover:bg-brand-600 group-hover:text-white transition-colors">{cat.name}</Button>
                 </Link>
               ))}
            </div>
@@ -106,56 +95,66 @@ export default async function Home() {
       {/* 4. New Release */}
       <section className="w-full py-24 bg-white">
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           <div className="flex items-end justify-between mb-12 border-b border-neutral-200 pb-4">
-             <h2 className="text-3xl md:text-4xl font-bold text-neutral-900">Popular Products</h2>
-             <Link href="/products" className="text-sm font-bold text-brand-600 hover:text-brand-800 uppercase tracking-wider hidden md:flex items-center gap-2 group">
-               View All Products
-               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform rtl:rotate-180 rtl:group-hover:-translate-x-1"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-             </Link>
-           </div>
-
+           <h2 className="text-3xl font-bold text-brand-600 mb-12 tracking-wider">New Release</h2>
            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {latestProducts.map((product: Product) => (
-                <Link href={`/products/${product.slug}`} key={product.id} className="group flex flex-col cursor-pointer bg-white rounded-sm hover:shadow-2xl transition-all duration-300 p-4 border border-neutral-100 hover:border-transparent">
-                  <div className="w-full aspect-3/4 bg-neutral-100 mb-6 overflow-hidden relative rounded-sm">
+                <Link href={`/products/${product.slug}`} key={product.id} className="group flex flex-col cursor-pointer bg-white">
+                  <div className="w-full aspect-[3/4] bg-neutral-100 mb-4 overflow-hidden relative rounded-sm shadow-sm">
                     {product.image ? (
-                      <img src={product.image} alt={product.name} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500 mix-blend-multiply" />
+                      <img src={product.image} alt={product.name} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-neutral-400 bg-neutral-100">No Image</div>
+                      <div className="w-full h-full bg-neutral-100 flex items-center justify-center text-neutral-400">No Image</div>
                     )}
                   </div>
-                  <h3 className="text-lg font-bold text-neutral-900 group-hover:text-brand-600 transition-colors">{product.name}</h3>
-                  <p className="text-sm text-neutral-500 mb-3 uppercase tracking-wide font-medium">{product.category_name || "Uncategorized"}</p>
-                  <p className="text-brand-600 font-bold text-xl">{parseFloat(product.price).toFixed(2)} JOD</p>
+                  <h3 className="text-lg font-semibold text-neutral-900 group-hover:text-brand-600 transition-colors">{product.name}</h3>
+                  <p className="text-brand-600 font-bold text-lg mt-2">{parseFloat(product.price).toFixed(2)} JOD</p>
                 </Link>
               ))}
            </div>
+           <div className="mt-16 flex justify-center">
+             <Link href="/products">
+                <Button className="bg-brand-600 text-white hover:bg-brand-700 rounded-sm font-semibold px-12 py-7 shadow-md tracking-widest uppercase">
+                  View More
+                </Button>
+             </Link>
+           </div>
          </div>
       </section>
 
-      {/* 5. About Us */}
-      <section className="w-full py-24 bg-neutral-900 text-white" id="about">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-16 justify-between items-center">
-            <div className="md:w-1/2">
-               <h2 className="text-4xl md:text-5xl font-bold mb-6">Why Choose <span className="font-light text-brand-400">RM Medwear</span></h2>
-               <div className="w-16 h-1 bg-brand-500 mb-8"></div>
-               <p className="text-lg text-neutral-300 leading-relaxed">
-                 At RM Medwear, we believe that medical professionals deserve apparel that works as hard as they do. Our premium scrubs combine innovative fabric technology with modern designs, ensuring you stay comfortable and confident throughout your shift.
-               </p>
-               <Link href="/products">
-                 <Button variant="outline" className="mt-8 border-white text-white hover:bg-white hover:text-neutral-900 rounded-sm px-8 uppercase tracking-widest font-semibold">
-                   Explore Collections
-                 </Button>
-               </Link>
-            </div>
-            <div className="md:w-1/2">
-              <div className="aspect-video bg-neutral-800 rounded-sm overflow-hidden shadow-2xl relative">
-                 <img src="/images/about-us.png" className="object-cover w-full h-full opacity-70 hover:opacity-100 transition-opacity duration-500" alt="About RM Medwear Team" />
-              </div>
+      {/* 5. Contact Form Section */}
+      <section className="w-full py-24 bg-neutral-50 relative overflow-hidden">
+         <div className="absolute top-0 right-0 w-64 h-64 bg-brand-600/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+         <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-600/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3"></div>
+         
+         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="bg-white p-8 md:p-12 shadow-2xl rounded-sm border border-neutral-100">
+              <h2 className="text-3xl font-bold text-brand-600 mb-8 text-center tracking-wide">Contact Us</h2>
+              <form className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-700 mb-2">First Name</label>
+                    <input type="text" className="w-full border border-neutral-200 rounded-sm p-4 focus:ring-brand-600 focus:border-brand-600 outline-none transition-colors" placeholder="John" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-700 mb-2">Last Name</label>
+                    <input type="text" className="w-full border border-neutral-200 rounded-sm p-4 focus:ring-brand-600 focus:border-brand-600 outline-none transition-colors" placeholder="Doe" />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">Email Address</label>
+                  <input type="email" className="w-full border border-neutral-200 rounded-sm p-4 focus:ring-brand-600 focus:border-brand-600 outline-none transition-colors" placeholder="john@example.com" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">Message</label>
+                  <textarea rows={4} className="w-full border border-neutral-200 rounded-sm p-4 focus:ring-brand-600 focus:border-brand-600 outline-none transition-colors resize-none" placeholder="How can we help?"></textarea>
+                </div>
+                <Button type="button" className="w-full bg-brand-600 text-white hover:bg-brand-700 rounded-sm py-7 mt-4 font-bold text-lg tracking-wider">
+                  Submit Request
+                </Button>
+              </form>
             </div>
          </div>
       </section>
-      
     </div>
   );
 }
