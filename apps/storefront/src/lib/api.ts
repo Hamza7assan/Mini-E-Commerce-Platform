@@ -52,7 +52,7 @@ export async function createOrder(data: Record<string, unknown>) {
 // --- Admin API Wrappers ---
 export async function authFetch(endpoint: string, options: RequestInit = {}) {
   const { useAuthStore } = await import("@/store/useAuthStore")
-  let token = useAuthStore.getState().accessToken
+  const token = useAuthStore.getState().accessToken
 
   const headers = new Headers(options.headers || {})
   if (!(options.body instanceof FormData)) {

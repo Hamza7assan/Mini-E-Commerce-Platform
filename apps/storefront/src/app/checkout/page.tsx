@@ -71,9 +71,9 @@ export default function CheckoutPage() {
       clearCart()
       router.push('/checkout/success')
     } catch (error) {
-      let errorMessage = error.message
+      let errorMessage = error instanceof Error ? error.message : String(error)
       try {
-        const parsed = JSON.parse(error.message)
+        const parsed = JSON.parse(errorMessage)
         if (parsed.items && Array.isArray(parsed.items)) {
           errorMessage = parsed.items.join(" ")
         }
