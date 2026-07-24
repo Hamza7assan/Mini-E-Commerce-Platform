@@ -1,4 +1,4 @@
-# Node
+# Node & Next.js
 node_modules/
 dist/
 .next/
@@ -6,15 +6,19 @@ out/
 build/
 .pnpm-store/
 
-# Django
+# Django & Python
 __pycache__/
 *.pyc
 *.pyo
-db.sqlite3
-media/
 venv/
 .env
 
-# General
+# Local Database & Uploads
+db.sqlite3
+media/
+
+# AI Traces & OS Junk
+AGENTS.md
+CLAUDE.md
 .DS_Store
 *.log

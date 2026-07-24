@@ -1,65 +1,33 @@
 # Medwear - Mini E-Commerce Platform
 
-A simplified e-commerce platform built as an intern test project. The system includes a Django + Django REST Framework backend and a unified Next.js (App Router) frontend serving both the public Storefront and the internal Admin Panel.
-
-## Architecture
-
-This project is structured as a monorepo containing two main parts:
-1. **Backend API (`apps/api`)**: Django & DRF. Serves as the source of truth for categories, products, orders, and variants. Handles JWT authentication for admin routes.
-2. **Frontend (`apps/storefront`)**: Next.js App Router (React). Unified application for both the public storefront and the admin dashboard. Uses `zustand` for client-side cart state, `framer-motion` for subtle animations, and generic CSS (with Tailwind classes) for styling.
+This is a simplified e-commerce platform built as a monorepo containing three distinct parts: a Django backend API, a Next.js Admin Panel, and a Next.js Storefront. 
 
 ## How to Run Locally
 
-### Prerequisites
-- Python 3.10+
-- Node.js 18+
+### 1. Backend (Django API)
+1. Navigate to the backend directory: `cd backend`
+2. Activate your virtual environment (e.g., `venv\Scripts\activate` or `source venv/bin/activate`)
+3. Install dependencies (if you haven't already): `pip install -r requirements.txt`
+4. Apply migrations: `python manage.py migrate`
+5. Run the server: `python manage.py runserver`
+*(The API will be available at http://127.0.0.1:8000)*
 
-### 1. Run the Backend (Django)
+### 2. Frontend (Storefront & Admin Panel)
+This project uses a workspace structure. From the root directory:
+1. Install dependencies: `npm install` (or `pnpm install`)
+2. Run the storefront: `cd apps/storefront && npm run dev`
+3. Run the admin panel: `cd ../admin && npm run dev`
 
-Open a terminal and navigate to the `apps/api` directory:
+## Assumptions Made
+* **Monorepo Structure**: I assumed that managing all three pieces in a single monorepo using shared packages (e.g., Zod schemas) would be the most efficient and production-realistic architecture for a tightly coupled system.
+* **Variant Architecture**: I assumed that variants (colors/sizes) should be distinct tables on the backend to allow for precise inventory tracking per SKU, even if it adds slight complexity to the UI.
+* **Cart Persistence**: As requested in the constraints, the cart relies entirely on client-side state (`Zustand`) and is not persisted to the database until checkout.
 
-```bash
-cd apps/api
-python -m venv venv
-# Activate the virtual environment:
-# Windows: venv\Scripts\activate
-# Mac/Linux: source venv/bin/activate
+## What I Would Do Differently With More Time
+* **Cloud Storage for Images**: Currently, images are saved to the local `media/` folder. For a true production environment, I would configure `django-storages` with AWS S3 or Cloudinary.
+* **Inline Admin Editing**: I would optimize the admin panel by implementing inline table editing for product variants, reducing the number of modal popups and separate API calls needed to update stock/prices.
+* **Server-Side Rendering (SSR) & SEO**: I would convert more of the storefront product pages to leverage Next.js SSR or Static Site Generation (SSG) to ensure perfect SEO for the public catalog.
+* **End-to-End Testing**: I would implement Playwright or Cypress to automate checkout flow tests.
 
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver 8000
-```
-*Note: We have pre-populated a superuser (`admin` / `admin`) if you wish to use the default Django admin.*
-
-### 2. Run the Frontend (Next.js)
-
-Open a new terminal and navigate to the `apps/storefront` directory:
-
-```bash
-cd apps/storefront
-npm install
-npm run dev
-```
-
-The frontend will start at [http://localhost:3000](http://localhost:3000).
-
-- **Storefront**: [http://localhost:3000](http://localhost:3000)
-- **Admin Panel**: [http://localhost:3000/admin](http://localhost:3000/admin)
-- **Admin Login Credentials**: Username: `admin` | Password: `admin` (or whichever superuser you create)
-
-## Assumptions Made & Scope Interpretation
-
-1. **Monorepo / Unified Frontend**: The prompt stated "A repo per part ... or one monorepo". We chose a monorepo to easily share types/schemas. We also combined the Admin Panel and Storefront into a single Next.js application under different route segments (`/` for storefront, `/admin` for dashboard) to simplify deployment and maximize component reuse.
-2. **Product Variants**: Although not strictly requested, real e-commerce apparel sites require variants (size, color). We implemented a basic variant system (Color + Size) connected to product stock. If you just want standard products, the base product model still tracks a `price` and `description`.
-3. **No Auth for Storefront**: Per the instructions, guest checkout is fully implemented without user accounts.
-4. **Validation**: We rely on backend Django constraint checks and serializer validation. On the frontend, basic HTML5 constraints and manual checks prevent invalid submissions (e.g., negative quantities).
-
-## What We'd Do Differently With More Time
-
-1. **Zod Validation on Frontend**: We would implement strict `zod` schemas for every form combined with `react-hook-form` to provide cleaner field-level error mapping straight from the backend. Currently, we handle field-level errors manually via state.
-2. **Image Hosting Setup**: Currently, images upload to the local Django `media/` directory. For a real project, we would wire up AWS S3 or Cloudinary.
-3. **Server-Side Rendered (SSR) Admin**: The admin panel heavily relies on client-side fetching (`useEffect`). With more time, we would leverage Next.js server components for the admin panel to prefetch dashboard stats and lists.
-4. **Toast Notifications**: We would swap basic browser `alert()` and simple UI alerts for a robust toast notification library (like `sonner` or `react-toastify`) for better UX during CRUD operations.
-
----
-*Built with Django, Next.js, and Framer Motion.*
+## Time Taken
+* **Roughly 10 hours over 5 days.**
