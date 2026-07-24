@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-brand-600: 184 100% 18%; 
+    --color-neutral-50: 210 20% 98%; 
+    --radius-card: 0.75rem; 
+  }
+}
