@@ -42,5 +42,4 @@ To access the Admin Panel (`http://localhost:3000/admin`), log in using the foll
 * **Server-Side Rendering (SSR) & SEO**: I would convert more of the storefront product pages to leverage Next.js SSR or Static Site Generation (SSG) to ensure perfect SEO for the public catalog.
 * **End-to-End Testing**: I would implement Playwright or Cypress to automate checkout flow tests.
 
-## Time Taken
-* **Roughly 10 hours over 5 days.**
+
