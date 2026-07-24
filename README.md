@@ -20,6 +20,7 @@ This project uses a workspace structure. From the root directory:
 
 ## Assumptions Made
 * **Monorepo Structure**: I assumed that managing all three pieces in a single monorepo using shared packages (e.g., Zod schemas) would be the most efficient and production-realistic architecture for a tightly coupled system.
+* **Database & Media Inclusion**: While it is normally poor practice to commit a local SQLite database (`db.sqlite3`) and `media/` uploads to source control, I explicitly committed them for this test project so that you can pull the repository and instantly view a populated, working storefront without having to manually seed dummy data.
 * **Variant Architecture**: I assumed that variants (colors/sizes) should be distinct tables on the backend to allow for precise inventory tracking per SKU, even if it adds slight complexity to the UI.
 * **Cart Persistence**: As requested in the constraints, the cart relies entirely on client-side state (`Zustand`) and is not persisted to the database until checkout.
 

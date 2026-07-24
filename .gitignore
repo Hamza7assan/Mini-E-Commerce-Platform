@@ -13,9 +13,7 @@ __pycache__/
 venv/
 .env
 
-# Local Database & Uploads
-db.sqlite3
-media/
+
 
 # AI Traces & OS Junk
 AGENTS.md
