@@ -19,13 +19,14 @@ This is a simplified e-commerce platform built as a monorepo containing three di
 This project uses a pnpm workspace structure to share code packages. From the root directory:
 1. Install dependencies globally using pnpm: `pnpm install` 
    *(Note: Using standard `npm install` at the root will fail to link the workspaces. You must use `pnpm`)*
-2. Run the storefront: `cd apps/storefront && npm run dev`
-   *(Storefront will be running on http://localhost:3000)*
-3. Run the admin panel: `cd apps/admin && npm run dev`
-   *(Admin Panel will be running on http://localhost:3001)*
+2. Run the Next.js frontend: `cd apps/storefront && npm run dev`
+
+**Access URLs:**
+* The Public Storefront is running on: `http://localhost:3000`
+* The Admin Dashboard is running seamlessly on: `http://localhost:3000/admin`
 
 ### 3. Default Admin Credentials
-To access the Next.js Admin Panel, log in using the following test credentials:
+To access the Admin Panel (`http://localhost:3000/admin`), log in using the following test credentials:
 - **Username:** `admin`
 - **Password:** `admin`
 
