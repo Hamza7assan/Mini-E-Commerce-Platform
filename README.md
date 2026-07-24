@@ -6,10 +6,13 @@ This is a simplified e-commerce platform built as a monorepo containing three di
 
 ### 1. Backend (Django API)
 1. Navigate to the backend directory: `cd backend`
-2. Activate your virtual environment (e.g., `venv\Scripts\activate` or `source venv/bin/activate`)
-3. Install dependencies (if you haven't already): `pip install -r requirements.txt`
-4. Apply migrations: `python manage.py migrate`
-5. Run the server: `python manage.py runserver`
+2. Create a virtual environment: `python -m venv venv`
+3. Activate the virtual environment:
+   - On Windows: `venv\Scripts\activate`
+   - On Mac/Linux: `source venv/bin/activate`
+4. Install dependencies: `pip install -r requirements.txt`
+5. Apply migrations: `python manage.py migrate`
+6. Run the server: `python manage.py runserver`
 *(The API will be available at http://127.0.0.1:8000)*
 
 ### 2. Frontend (Storefront & Admin Panel)
