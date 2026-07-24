@@ -16,10 +16,18 @@ This is a simplified e-commerce platform built as a monorepo containing three di
 *(The API will be available at http://127.0.0.1:8000)*
 
 ### 2. Frontend (Storefront & Admin Panel)
-This project uses a workspace structure. From the root directory:
-1. Install dependencies: `npm install` (or `pnpm install`)
+This project uses a pnpm workspace structure to share code packages. From the root directory:
+1. Install dependencies globally using pnpm: `pnpm install` 
+   *(Note: Using standard `npm install` at the root will fail to link the workspaces. You must use `pnpm`)*
 2. Run the storefront: `cd apps/storefront && npm run dev`
-3. Run the admin panel: `cd ../admin && npm run dev`
+   *(Storefront will be running on http://localhost:3000)*
+3. Run the admin panel: `cd apps/admin && npm run dev`
+   *(Admin Panel will be running on http://localhost:3001)*
+
+### 3. Default Admin Credentials
+To access the Next.js Admin Panel, log in using the following test credentials:
+- **Username:** `admin`
+- **Password:** `admin`
 
 ## Assumptions Made
 * **Monorepo Structure**: I assumed that managing all three pieces in a single monorepo using shared packages (e.g., Zod schemas) would be the most efficient and production-realistic architecture for a tightly coupled system.
