@@ -29,7 +29,7 @@ This project uses a pnpm workspace structure to share code packages. From the ro
 To access the Admin Panel (`http://localhost:3000/admin`), log in using the following test credentials:
 - **Username:** `admin`
 - **Password:** `admin`
-
+ 
 ## Assumptions Made
 * **Monorepo Structure**: I assumed that managing all three pieces in a single monorepo using shared packages (e.g., Zod schemas) would be the most efficient and production-realistic architecture for a tightly coupled system.
 * **Database & Media Inclusion**: While it is normally poor practice to commit a local SQLite database (`db.sqlite3`) and `media/` uploads to source control, I explicitly committed them for this test project so that you can pull the repository and instantly view a populated, working storefront without having to manually seed dummy data.
