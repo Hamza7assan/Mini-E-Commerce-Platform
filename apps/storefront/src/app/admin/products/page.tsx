@@ -63,8 +63,8 @@ export default function AdminProductsPage() {
       setFormData({
         name: product.name,
         slug: product.slug,
-        category: product.category,
-        price: product.price,
+        category: String(product.category || ""),
+        price: String(product.price || ""),
         description: product.description,
         is_active: product.is_active,
         image: null
@@ -138,10 +138,11 @@ export default function AdminProductsPage() {
 
   const handleVariantSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!selectedProductForVariants) return
     setIsVariantSaving(true)
     
     const data = new FormData()
-    data.append("product", selectedProductForVariants.id)
+    data.append("product", String(selectedProductForVariants.id))
     data.append("color", variantFormData.color)
     data.append("size", variantFormData.size)
     data.append("stock", variantFormData.stock)
@@ -170,6 +171,7 @@ export default function AdminProductsPage() {
   }
 
   const handleVariantDelete = async (id: number) => {
+    if (!selectedProductForVariants) return
     if (confirm("Delete this variant?")) {
       try {
         await deleteAdminVariant(id)
@@ -241,7 +243,7 @@ export default function AdminProductsPage() {
                       <span className="font-medium text-neutral-900">{product.name}</span>
                     </td>
                     <td className="px-6 py-4 text-neutral-600">{product.category_name}</td>
-                    <td className="px-6 py-4 font-medium text-neutral-900">${parseFloat(product.price).toFixed(2)}</td>
+                    <td className="px-6 py-4 font-medium text-neutral-900">${Number(product.price || 0).toFixed(2)}</td>
                     <td className="px-6 py-4 text-center font-medium text-neutral-600">{product.total_stock}</td>
                     <td className="px-6 py-4">
                       <Badge variant={product.is_active ? 'default' : 'secondary'}>

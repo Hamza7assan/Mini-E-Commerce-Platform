@@ -1,61 +1,59 @@
-"use client"
-import { motion } from "framer-motion"
-import { staggerContainer, fadeUp } from "@/lib/motion-variants"
-import Link from "next/link"
-import { Card, CardContent } from "@/components/ui/Card"
-import { Button } from "@/components/ui/Button"
+"use client";
 
 import { Product } from "@/types";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
-export function ProductGrid({ initialProducts }: { initialProducts: Product[] }) {
-  
+interface ProductGridProps {
+  initialProducts: Product[];
+}
 
+export function ProductGrid({ initialProducts }: ProductGridProps) {
   if (!initialProducts || initialProducts.length === 0) {
-    return <div className="text-center py-12 text-neutral-500">No Products Found</div>
+    return (
+      <div className="w-full py-20 text-center bg-white rounded-xl border border-neutral-200">
+        <p className="text-lg text-neutral-500 font-medium">No products found matching your criteria.</p>
+      </div>
+    );
   }
 
   return (
-    <motion.div 
-      variants={staggerContainer}
-      initial="hidden"
-      animate="visible"
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-    >
-      {initialProducts.map((product) => (
-        <motion.div key={product.id} variants={fadeUp}>
-          <Link href={`/products/${product.slug}`}>
-            <Card className="group cursor-pointer h-full border border-neutral-100 shadow-sm hover:shadow-lg transition-all overflow-hidden bg-white flex flex-col">
-              <div className="w-full aspect-3/4 bg-neutral-100 overflow-hidden relative">
-                {product.image ? (
-                  <img 
-                    src={product.image} 
-                    alt={product.name} 
-                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" 
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-neutral-400">No Image</div>
-                )}
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
+      {initialProducts.map((product, index) => (
+        <motion.div
+          key={product.id}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: index * 0.05 }}
+          className="flex flex-col group"
+        >
+          <Link href={`/products/${product.slug}`} className="block overflow-hidden rounded-xl bg-neutral-100 aspect-3/4 mb-4 relative border border-neutral-100">
+            {product.image ? (
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-neutral-400 text-sm font-medium">
+                No Image
               </div>
-              <CardContent className="p-5 flex flex-col grow">
-                <h3 className="text-lg font-bold text-neutral-900 group-hover:text-blue-600 transition-colors">
-                  {product.name}
-                </h3>
-                {product.category_name && (
-                  <p className="text-xs font-semibold tracking-wider text-neutral-500 uppercase mt-1 mb-2">
-                    {product.category_name}
-                  </p>
-                )}
-                <div className="mt-auto pt-4 flex items-center justify-between">
-                  <p className="text-blue-600 font-bold text-lg">${parseFloat(product.price).toFixed(2)}</p>
-                  <Button variant="outline" size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity">
-                    View Product
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            )}
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
           </Link>
+
+          <div className="flex flex-col px-1">
+            <Link href={`/products/${product.slug}`}>
+              <h3 className="text-sm font-medium text-neutral-600 group-hover:text-brand-600 transition-colors truncate mb-1">
+                {product.name}
+              </h3>
+            </Link>
+            <p className="text-brand-600 font-bold text-base">
+              {Number(product.price || 0).toFixed(0)} JOD
+            </p>
+          </div>
         </motion.div>
       ))}
-    </motion.div>
-  )
+    </div>
+  );
 }

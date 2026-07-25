@@ -34,7 +34,7 @@ export default function AdminDashboardPage() {
                <div className="h-8 bg-neutral-100 rounded animate-pulse"></div>
             ) : (
               <div className="text-2xl font-bold text-neutral-900">
-                ${parseFloat(stats.total_revenue as any || 0).toFixed(2)}
+                ${Number(stats.total_revenue || 0).toFixed(2)}
               </div>
             )}
           </CardContent>

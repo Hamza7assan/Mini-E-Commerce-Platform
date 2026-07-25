@@ -77,7 +77,7 @@ export const CartDrawer = () => {
                           <span className="text-sm font-medium w-6 text-center">{item.quantity}</span>
                           <button onClick={() => updateQuantity(item.id, item.size, item.color, item.quantity + 1)} className="px-3 py-1 text-neutral-500 hover:text-brand-600 transition-colors">+</button>
                         </div>
-                        <p className="font-semibold text-brand-600">{(item.price * item.quantity).toFixed(2)} JOD</p>
+                        <p className="font-semibold text-brand-600">{(item.price * item.quantity).toFixed(0)} JOD</p>
                       </div>
                     </div>
                   </div>
@@ -87,13 +87,24 @@ export const CartDrawer = () => {
 
             {}
             {items.length > 0 && (
-              <div className="p-6 border-t border-neutral-100 bg-neutral-50/50">
-                <div className="flex justify-between items-center mb-6 font-bold text-neutral-900 text-lg">
+              <div className="p-6 border-t border-neutral-100 bg-neutral-50/50 space-y-3">
+                <div className="flex justify-between items-center mb-4 font-bold text-neutral-900 text-lg">
                   <span>Total</span>
-                  <span>{subtotal.toFixed(2)} JOD</span>
+                  <span>{subtotal.toFixed(0)} JOD</span>
                 </div>
                 {}
-                <Button onClick={handleCheckout} className="w-full uppercase tracking-widest rounded-none" size="lg">
+                <Button
+                  onClick={() => {
+                    closeCart();
+                    router.push("/cart");
+                  }}
+                  variant="outline"
+                  className="w-full uppercase tracking-widest rounded-xl border-brand-600 text-brand-600 hover:bg-brand-50"
+                  size="lg"
+                >
+                  View Basket
+                </Button>
+                <Button onClick={handleCheckout} className="w-full uppercase tracking-widest rounded-xl bg-brand-600 hover:bg-brand-700 text-white" size="lg">
                   Checkout
                 </Button>
               </div>

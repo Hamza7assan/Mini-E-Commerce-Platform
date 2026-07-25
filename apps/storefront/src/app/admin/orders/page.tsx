@@ -86,7 +86,7 @@ export default function AdminOrdersPage() {
                       <p className="text-neutral-500 text-xs">{order.customer_email}</p>
                     </td>
                     <td className="px-6 py-4 text-neutral-600">{order.items?.length || 0} items</td>
-                    <td className="px-6 py-4 font-medium text-neutral-900">${parseFloat(order.total || 0).toFixed(2)}</td>
+                    <td className="px-6 py-4 font-medium text-neutral-900">${Number(order.total || 0).toFixed(2)}</td>
                     <td className="px-6 py-4">
                       <select 
                         value={order.status}
@@ -169,15 +169,15 @@ export default function AdminOrdersPage() {
                             )}
                           </td>
                           <td className="px-4 py-3 text-center">{item.quantity}</td>
-                          <td className="px-4 py-3 text-right">${parseFloat(item.unit_price).toFixed(2)}</td>
-                          <td className="px-4 py-3 text-right font-medium">${parseFloat(item.line_total).toFixed(2)}</td>
+                          <td className="px-4 py-3 text-right">${Number(item.unit_price || 0).toFixed(2)}</td>
+                          <td className="px-4 py-3 text-right font-medium">${Number(item.line_total || 0).toFixed(2)}</td>
                         </tr>
                       ))}
                     </tbody>
                     <tfoot className="bg-neutral-50 border-t font-semibold">
                       <tr>
                         <td colSpan={3} className="px-4 py-3 text-right">Grand Total:</td>
-                        <td className="px-4 py-3 text-right text-blue-600">${parseFloat(selectedOrder.total).toFixed(2)}</td>
+                        <td className="px-4 py-3 text-right text-blue-600">${Number(selectedOrder.total || 0).toFixed(2)}</td>
                       </tr>
                     </tfoot>
                   </table>

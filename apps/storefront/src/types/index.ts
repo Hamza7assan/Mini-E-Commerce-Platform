@@ -35,8 +35,11 @@ export interface Product {
 
 export interface OrderItem {
   id?: number;
+  product?: number;
   product_name?: string;
   variant_details?: string;
+  color?: string;
+  size?: string;
   unit_price?: string | number;
   line_total?: string | number;
   variant_id: number;

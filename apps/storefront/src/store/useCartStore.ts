@@ -16,7 +16,7 @@ interface CartState {
   items: CartItem[];
   openCart: () => void;
   closeCart: () => void;
-  addItem: (item: Omit<CartItem, 'quantity'>) => void;
+  addItem: (item: Omit<CartItem, 'quantity'> & { quantity?: number }) => void;
   removeItem: (id: string | number, size: string, color: string) => void;
   updateQuantity: (id: string | number, size: string, color: string, quantity: number) => void;
   clearCart: () => void;
@@ -34,6 +34,7 @@ export const useCartStore = create<CartState>()(
   
   addItem: (newItem) =>
     set((state) => {
+      const qty = newItem.quantity || 1;
       const existingItem = state.items.find(
         (item) => item.id === newItem.id && item.size === newItem.size && item.color === newItem.color
       );
@@ -41,12 +42,12 @@ export const useCartStore = create<CartState>()(
         return {
           items: state.items.map((item) =>
             item.id === newItem.id && item.size === newItem.size && item.color === newItem.color
-              ? { ...item, quantity: item.quantity + 1 }
+              ? { ...item, quantity: item.quantity + qty }
               : item
           ),
         };
       }
-      return { items: [...state.items, { ...newItem, quantity: 1 }] };
+      return { items: [...state.items, { ...newItem, quantity: qty }] };
     }),
 
   
